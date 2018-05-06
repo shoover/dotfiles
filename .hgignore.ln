@@ -16,6 +16,7 @@ syntax: glob
 *.ilk
 *.jar
 *.lib
+*.log
 *.o
 *.obj
 *.opendb
