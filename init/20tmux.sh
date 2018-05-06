@@ -1,3 +1,4 @@
+# Install from source to support specific syntax.
 if ! [ -x "$(command -v tmux)" ]; then
     # https://gist.github.com/P7h/91e14096374075f5316e
     VERSION=2.6
@@ -19,4 +20,4 @@ if ! [ -x "$(command -v tmux)" ]; then
     popd
 fi
 
-ln -s .tmux.conf.ln ~/.tmux.conf
+ln -s $(pwd -P)/.tmux.conf.ln ~/.tmux.conf

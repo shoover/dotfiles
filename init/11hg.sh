@@ -19,4 +19,5 @@ popd
 
 sudo python -m pip install hg-evolve
 
-ln .hgrc.ln ~/.hgrc
+ln $(pwd -P)/.hgrc.ln ~/.hgrc
+ln $(pwd -P)/.hgignore.ln .hgignore
