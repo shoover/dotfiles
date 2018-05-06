@@ -1,0 +1,103 @@
+# tmux settings
+# Requires tmux -V >= 2.6
+
+#
+# Keys
+#
+
+# Prefix = C-g, so I get back C-b to move back one character.
+#set -g prefix ^g
+set -g prefix `
+bind-key ` send-prefix
+
+# Set reload key to r
+bind r source-file ~/.tmux.conf
+
+# Exit the parent process on detach
+bind d detach-client -P
+
+# prefix space selects last window (overrides next-layout)
+bind Space last-window
+
+bind -n C-PgDn next-window
+bind -n C-PgUp previous-window
+
+# Good old M-x
+#bind -n M-x command-prompt
+bind-key x command-prompt
+
+#
+# Mouse/copy mode
+#
+set -g mouse on
+
+# Mouse wheel up enters copy mode
+bind -n WheelUpPane if -Ft= '#{mouse_any_flag}' 'send-keys -M' 'if -Ft= "#{pane_in_mode}" "send-keys -M" "copy-mode -e"'
+bind -n M-v copy-mode -ue # M-v enters copy mode
+
+# Once in copy-mode, mouse wheel scrolls 2 lines smoothly.
+bind -Tcopy-mode WheelUpPane   send -N2 -X scroll-up
+bind -Tcopy-mode WheelDownPane send -N2 -X scroll-down
+
+# Exit copy-mode with right click or [.
+bind -Tcopy-mode MouseUp3Pane send -X cancel # Right click quit copy-mode
+bind -Tcopy-mode [            send -X cancel # [ quit copy-mode
+
+# M-w copies marked text to Windows clipboard.
+if-shell 'uname | grep -qi MSYS' 'bind-key -n -Tcopy-mode M-w send -X copy-pipe "cat > /dev/clipboard"'
+
+# Dragging the mouse copies to clipboard.
+#bind -Tcopy-mode MouseDragEnd1Pane send -X copy-pipe "cat > /dev/clipboard" \; send -X clear-selection
+
+# What I really want is for drag release to copy to the system clipboard, but
+# I can't get it to work because begin-selection from a mouse event goes into
+# a copy drag mode that is hardcoded to copy-selection (no pipe) on release.
+#
+# Workaround: Use shift+drag to bypass tmux and use xterm select. Shift+Insert
+# to paste.
+
+#
+# Session and window settings
+#
+
+set -g window-style "bg=colour232" # Almost black, just to take the edge off
+
+# Count sessions starting at 1
+set -g base-index 1
+
+# Try to work better with Windows console apps. But then it eats my PS1
+# and messes up hg prompt colors?
+#set -s default-command "winpty bash"
+
+# Title bar
+set -g set-titles on
+set -g set-titles-string '#(whoami)@#h' #' #(curl ipecho.net/plain;echo)'
+
+# Cursor--assuming Cs and Cr are set in terminal-overrides, do this in the terminal:
+# printf '\033[2 q' # non-blinking block, 1 q blinking block
+# printf '\033[4 q' # non-blinking underline, 3 q blinking underline
+# printf '\033]12;red\033\\' # cursor color. Doesn't work. I want to try colour136 dark orange
+
+#
+# Status bar
+#
+set -g status-style "bg=colour234" # dark gray
+
+# Just the session name on the left
+set -g status-left "#[fg=green][#S] "
+set -g status-left-length 15
+
+# User/host/date on the right
+set -g status-right '#[fg=green]#(whoami)@#(hostname) #[fg=yellow][%a %d %b %R]'
+set -g status-right-length 60
+
+# Typical window index, title, and flags in the middle
+# blue 75 is readable on dark gray. purple 98 works ok, too.
+set -g status-justify left
+set -g window-status-current-format "#[fg=colour75,bold,underscore]#I:#W#F"
+set -g window-status-format "#[fg=colour75]#I:#W#F"
+set -g window-status-separator '|'
+
+# More time to read error messages
+set -g display-time 2000
+

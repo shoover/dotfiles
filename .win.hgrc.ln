@@ -1,0 +1,7 @@
+; set TMPDIR for this to work on Windows
+editor=emacsclientw
+
+ssh=plink
+
+;tortoisemerge,winmergeu,vsdiffmerge
+merge=p4merge

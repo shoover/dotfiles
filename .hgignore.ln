@@ -1,0 +1,38 @@
+syntax: regexp
+\#.*\#
+\.?waf-\d+\.\d+\.\d+-[0-9a-f]{32} # unpacked waf files
+
+syntax: glob
+**.svn/
+**bin/
+**obj/
+*.bak
+*.depproj
+*.dir-locals.el
+*.dll
+*.elc
+*.exe
+*.exp
+*.ilk
+*.jar
+*.lib
+*.o
+*.obj
+*.opendb
+*.opensdf
+*.orig
+*.pch
+*.pdb
+*.pyc
+*.pyo
+*.rej
+*.sdf
+*.suo
+*.user
+*.vsp
+*~
+Debug
+Release
+classes
+out
+scons-out

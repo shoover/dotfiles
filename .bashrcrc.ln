@@ -1,0 +1,40 @@
+
+# enable color support of ls and also add handy aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto'
+    alias dir='dir --color=auto'
+    alias vdir='vdir --color=auto'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# colored GCC warnings and errors
+export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
+
+# some more ls aliases
+alias ll='ls -l'
+alias la='ls -A'
+alias l='ls -CF'
+
+export EDITOR='emacsclient -n -a emacs'
+alias e='$EDITOR'
+
+
+# mkdir and cd in one shot
+function mcd() { [ -n "$1" ] && mkdir -p "$1" && cd "$1"; }
+
+# Pipe any command to less
+function so {
+    eval "$@" |less -I~
+}
+
+
+function hg_prompt {
+    hg prompt "${GREEN}{root|basename}{ ${BLUE}{branch|quiet}}{ ${D}${DARK_BLUE}[{bookmark}]} ${D}${ORANGE}@r{rev}{status}{update}{ ${DARK_BLUE}{patch}}{ ${DARK_BLUE}mq({patch|applied|quiet}/}{{patch|count|quiet})} ${D}{${GREEN}({tags})}${D}" 2> /dev/null
+}
+
+export PROMPT_COMMAND='HG_PROMPT="$(hg_prompt)"'
+export PS1='\[${GREEN}${BOLD}\]\w\[${D}\] ${HG_PROMPT}'$'\n\$ '
