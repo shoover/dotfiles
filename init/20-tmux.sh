@@ -19,5 +19,3 @@ if ! [ -x "$(command -v tmux)" ]; then
 
     popd
 fi
-
-ln -s $(pwd -P)/.tmux.conf.ln ~/.tmux.conf

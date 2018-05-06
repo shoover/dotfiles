@@ -1,6 +1,4 @@
-cp -n .emacs.cp ~/.emacs
-
-pushd ~
+pushd $DEST
 
 if ! [ -d "emacs" ]; then
     hg clone ssh://hg@bitbucket.org/shoover/emacs.d emacs
