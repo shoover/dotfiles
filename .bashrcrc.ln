@@ -55,7 +55,7 @@ if grep -q Microsoft /proc/version; then
     . ~/.bash.wsl.rc
 fi
 
-if [ -a "${MSYSTEM:-x}" = "MSYS" ]; then
+if [ "${MSYSTEM:-x}" = "MSYS" ]; then
     . ~/.bash.msys2.rc
 fi
 
