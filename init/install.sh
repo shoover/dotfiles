@@ -49,5 +49,5 @@ export DOTFILES
 find . -name "[0-9][0-9]-*.sh" | sort -n | while read script ; do
     echo ''
     echo Installing $script
-    bash -c "${script}"
+    bash -x $script
 done
