@@ -22,7 +22,6 @@ alias l='ls -CF'
 export EDITOR='emacsclient -n -a emacs'
 alias e='$EDITOR'
 
-
 # mkdir and cd in one shot
 function mcd() { [ -n "$1" ] && mkdir -p "$1" && cd "$1"; }
 
@@ -31,6 +30,18 @@ function so {
     eval "$@" |less -I~
 }
 
+# Use xterm-style 256 colors http://misc.flogisoft.com/bash/tip_colors_and_formatting#colors2
+CYAN=$'\e[36;1m'
+DARK_BLUE=$'\e[38;5;69m'
+RED=$'\e[31;1m'
+YELLOW=$'\e[33;1m'
+BLUE=$'\e[34;1m'
+GREEN=$'\e[32m'
+PURPLE=$'\e[35m'
+ORANGE=$'\e[38;5;172m'
+D=$'\e[0m'
+BOLD=$'\e[1m'
+BOLD_D=$'\e[21m' # reset bold
 
 function hg_prompt {
     hg prompt "${GREEN}{root|basename}{ ${BLUE}{branch|quiet}}{ ${D}${DARK_BLUE}[{bookmark}]} ${D}${ORANGE}@r{rev}{status}{update}{ ${DARK_BLUE}{patch}}{ ${DARK_BLUE}mq({patch|applied|quiet}/}{{patch|count|quiet})} ${D}{${GREEN}({tags})}${D}" 2> /dev/null
@@ -38,3 +49,33 @@ function hg_prompt {
 
 export PROMPT_COMMAND='HG_PROMPT="$(hg_prompt)"'
 export PS1='\[${GREEN}${BOLD}\]\w\[${D}\] ${HG_PROMPT}'$'\n\$ '
+
+if grep -q Microsoft /proc/version; then
+    . ~/.bash.wsl.rc
+fi
+
+if [ -a "${MSYSTEM:-x}" = "MSYS" ]; then
+    . ~/.bash.msys2.rc
+fi
+
+# Reattach to tmux if not disabled, not already in screen
+if [ "${NO_TMUX:-x}" = x -a "${STARTED_TMUX:-x}" = x ]
+then
+    # Coming from SSH or MSYS/Cygwin
+    if [ \( "${SSH_TTY:-x}" != x -o "${TERM:0:5}" = "xterm" \) ]
+    then
+        export STARTED_TMUX=1
+
+        echo "Checking tmux sessions..."
+
+        # Attach only to an unattached session, or start a new one.
+        (tmux ls | grep -vq attached && tmux attach) || tmux new-session
+        # tmux doesn't go in the background like screen, so it exits here only after detaching
+
+        # Alternate, per-session attach
+        # ( (tmux has-session -t remote && \
+        #        tmux attach-session -t remote) || \
+        #       (tmux new-session -s remote) ) && exit 0
+        # echo "tmux failed to start"
+    fi
+fi
