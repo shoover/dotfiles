@@ -47,8 +47,9 @@ function hg_prompt {
     hg prompt "${GREEN}{root|basename}{ ${BLUE}{branch|quiet}}{ ${D}${DARK_BLUE}[{bookmark}]} ${D}${ORANGE}@r{rev}{status}{update}{ ${DARK_BLUE}{patch}}{ ${DARK_BLUE}mq({patch|applied|quiet}/}{{patch|count|quiet})} ${D}{${GREEN}({tags})}${D}" 2> /dev/null
 }
 
-export PROMPT_COMMAND='HG_PROMPT="$(hg_prompt)"'
-export PS1='\[${GREEN}${BOLD}\]\w\[${D}\] ${HG_PROMPT}'$'\n\$ '
+#export PROMPT_COMMAND='HG_PROMPT="$(hg_prompt)"'
+#export PS1='\[${GREEN}${BOLD}\]\w\[${D}\] ${HG_PROMPT}'$'\n\$ '
+export PS1='\[${GREEN}${BOLD}\]\w\[${D}\]'$'\n\$ '
 
 if grep -q Microsoft /proc/version; then
     . ~/.bash.wsl.rc
