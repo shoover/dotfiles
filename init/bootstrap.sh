@@ -15,4 +15,4 @@ rm -rf /tmp/dotfiles
 mkdir -p $dst
 cd $dst
 hg clone ssh://hg@bitbucket.org/shoover/dotfiles
-bash -c $dst/dotfiles/init/install.sh
+bash -c dotfiles/init/install.sh
