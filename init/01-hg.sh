@@ -1,7 +1,7 @@
 #
 # Python and package managers
 #
-sudo apt install python2.7 python2.7-dev
+sudo apt install -y python2.7 python2.7-dev
 
 if ! [ -x "$(command -v easy_install)" ]; then
     pushd /tmp
