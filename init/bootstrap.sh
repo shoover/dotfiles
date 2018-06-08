@@ -4,7 +4,7 @@
 # ./bootstrap.sh                  # default install files to HOME, run installers, clone repo
 # ./bootstrap.sh $HOME dotfiles   # dotfiles only, no installers, no clone (no root)
 
-dst=$(realpath ${1:-$HOME})
+dst=$(readlink -f ${1:-$HOME})
 selection=${2:all}
 
 echo Bootstrap installing dotfiles to $dst
@@ -18,10 +18,13 @@ wget -O dotfiles.tar.gz https://bitbucket.org/shoover/dotfiles/get/default.tar.g
 mkdir dotfiles
 tar xzf dotfiles.tar.gz --strip 1 -C dotfiles
 
-# Dotfiles only, for non-root, quick setup
+# Copy archive and install dotfiles only, for non-root, quick setup
 if [ "$selection" == "dotfiles" ]
 then
-    . dotfiles/init/install.sh $dst $selection
+    cp -R dotfiles $dst/
+    rm -rf /tmp/dotfiles
+    cd $dst
+    dotfiles/init/install.sh $dst $selection
     exit
 fi
 
