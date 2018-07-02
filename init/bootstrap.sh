@@ -5,7 +5,7 @@
 # ./bootstrap.sh $HOME dotfiles   # dotfiles only, no installers, no clone (no root)
 
 dst=$(readlink -f ${1:-$HOME})
-selection=${2:all}
+selection=${2:-all}
 
 echo Bootstrap installing dotfiles to $dst
 

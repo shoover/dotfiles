@@ -10,7 +10,7 @@ set -e
 #set -x
 
 DEST=$(readlink -f ${1:-$HOME})
-selection=${2:all}
+selection=${2:-all}
 
 mkdir -p "$DEST"
 
