@@ -63,11 +63,11 @@ record=
 schemes=
 shelve=
 
-evolve=
-
 hggit=~/dev/hgext/hg-git/hggit
 prompt=~/dev/hgext/hg-prompt/prompt.py
 remotebranches=~/dev/hgext/hg-remotebranches/hg_remotebranches.py
+mercurial_keyring=
+evolve=
 
 [subrepos]
 svn:allowed=true

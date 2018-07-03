@@ -1,4 +1,4 @@
-sudo easy_install dulwich # for hg-git
+easy_install --user dulwich # for hg-git
 
 mkdir -p $DEST/dev/hgext
 pushd $DEST/dev/hgext
@@ -17,4 +17,6 @@ fi
 
 popd
 
-sudo python -m pip install hg-evolve
+pip install --user hg-evolve
+pip install --user keyring
+pip install --user mercurial_keyring
