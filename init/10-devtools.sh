@@ -1,7 +1,7 @@
 #
 # The text editor
 #
-sudo apt install -y emacs25-nox
+sudo apt install -y emacs25-nox || sudo apt install -y emacs24-nox
 
 #
 # Ruby
