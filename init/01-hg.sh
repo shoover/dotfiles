@@ -12,11 +12,11 @@ fi
 if ! [ -x "$(command -v pip)" ]; then
     pushd /tmp
     wget https://bootstrap.pypa.io/get-pip.py
-    sudo python get-pip.py
+    python get-pip.py --user
     popd
 fi
 
 #
 # Source control
 #
-sudo easy_install mercurial
+easy_install --user --upgrade mercurial
