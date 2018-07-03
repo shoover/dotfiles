@@ -22,6 +22,9 @@ bind Space last-window
 bind -n C-PgDn next-window
 bind -n C-PgUp previous-window
 
+# Kill pane
+bind k killp
+
 bind-key x command-prompt
 
 #
