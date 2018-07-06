@@ -36,9 +36,9 @@ set -g mouse on
 bind -n WheelUpPane if -Ft= '#{mouse_any_flag}' 'send-keys -M' 'if -Ft= "#{pane_in_mode}" "send-keys -M" "copy-mode -e"'
 bind -n M-v copy-mode -ue # M-v enters copy mode
 
-# Once in copy-mode, mouse wheel scrolls 2 lines smoothly.
-bind -Tcopy-mode WheelUpPane   send -N2 -X scroll-up
-bind -Tcopy-mode WheelDownPane send -N2 -X scroll-down
+# Once in copy-mode, mouse wheel scrolls multiple lines smoothly.
+bind -Tcopy-mode WheelUpPane   send -N3 -X scroll-up
+bind -Tcopy-mode WheelDownPane send -N3 -X scroll-down
 
 # Exit copy-mode with right click or [.
 bind -Tcopy-mode MouseUp3Pane send -X cancel # Right click quit copy-mode
