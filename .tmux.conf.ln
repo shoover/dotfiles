@@ -61,7 +61,7 @@ if-shell 'uname | grep -qi MSYS' 'bind-key -n -Tcopy-mode M-w send -X copy-pipe 
 # Session and window settings
 #
 
-set -g window-style "bg=colour232" # Almost black, just to take the edge off
+set -g window-style "bg=colour232,fg=white" # Almost black bg, just to take the edge off
 
 # Count sessions starting at 1
 set -g base-index 1
