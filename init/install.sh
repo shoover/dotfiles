@@ -25,7 +25,9 @@ function install_dotsymlinks {
     do
         dst="$DEST/$(basename "${src%.*}")"
         if [ -L "$dst" ]; then
-            echo Link "$dst" exists
+            echo Link "$dst" exists, skipping link
+        elif [ -f "$dst" ]; then
+            echo File "$dst" exists, skipping link
         else
             echo Linking "$dst"
             ln -s "$src" "$dst"
@@ -38,7 +40,9 @@ function install_dotcopies {
     do
         dst="$DEST/$(basename "${src%.*}")"
         if [ -f "$dst" ]; then
-            echo Copy "$dst" exists
+            echo File "$dst" exists, skipping copy
+        elif [ -L "$dst" ]; then
+            echo Link "$dst" exists, skipping copy
         else
             echo Copying "$dst"
             cp -n "$src" "$dst"
