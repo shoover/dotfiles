@@ -3,3 +3,7 @@
 
 ;[ui]
 ;username=Shawn Hoover <shawn.hoover@gmail.com>
+
+; May be needed for mounted file systems on Linux
+;[trusted]
+;users = root
