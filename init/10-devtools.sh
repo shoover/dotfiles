@@ -1,7 +1,9 @@
 #
-# The text editor
+# The text editor. Full package for desktop, -nox for servers.
 #
-sudo apt install -y emacs25-nox || sudo apt install -y emacs24-nox
+emacsSuffix=""
+ls /usr/bin/*session | egrep -i "gnome|kde[^v]|mate|cinnamon|lxde|xfce|jwm" || emacsSuffix=-nox
+sudo apt install -y emacs25$emacsSuffix || sudo apt install -y emacs24$emacsSuffix
 
 #
 # Ruby
