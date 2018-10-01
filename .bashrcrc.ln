@@ -62,14 +62,12 @@ if [ "${MSYSTEM:-x}" = "MSYS" ]; then
     . ~/.bash.msys2.rc
 fi
 
-# Reattach to tmux if not disabled, not already in screen
-if [ "${NO_TMUX:-x}" = x -a "${STARTED_TMUX:-x}" = x ]
+# Reattach to tmux if not disabled, not already in a session.
+if [ "${NO_TMUX:-x}" = x -a "${TMUX:-x}" = x ]
 then
-    # Coming from SSH or MSYS/Cygwin
-    if [ \( "${SSH_TTY:-x}" != x -o "${TERM:0:5}" = "xterm" \) ]
+    # Coming from SSH or MSYS/Cygwin/WSL (xterm) w/ no Gnome Terminal (VTE_VERSION)
+    if [ "${SSH_TTY:-x}" != x -o \( "${TERM:0:5}" = "xterm" -a "${VTE_VERSION:-x}" = x \) ]
     then
-        export STARTED_TMUX=1
-
         echo "Checking tmux sessions..."
 
         # Attach only to an unattached session, or start a new one.
