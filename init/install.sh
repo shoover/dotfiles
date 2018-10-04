@@ -13,6 +13,7 @@ DEST=$(readlink -f ${1:-$HOME})
 selection=${2:-all}
 
 mkdir -p "$DEST"
+mkdir -p "$DEST/bin"
 
 DOTFILES=$(cd "$(dirname "$BASH_SOURCE")/.."; pwd -P)
 
@@ -50,6 +51,21 @@ function install_dotcopies {
     done
 }
 
+function install_dest_bin {
+    for src in $(find -H "$DOTFILES/bin" -maxdepth 1 -type f)
+    do
+        dst="$DEST/bin/$(basename "${src}")"
+        if [ -L "$dst" ]; then
+            echo Link "$dst" exists, skipping link
+        elif [ -f "$dst" ]; then
+            echo File "$dst" exists, skipping link
+        else
+            echo Linking "$dst"
+            ln -s "$src" "$dst"
+        fi
+    done
+}
+
 #
 # Run the installer scripts
 #
@@ -66,6 +82,7 @@ function install_scripts {
 
 install_dotsymlinks
 install_dotcopies
+install_dest_bin
 
 if [ "$selection" == "all" ]; then
     install_scripts

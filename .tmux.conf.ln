@@ -19,6 +19,9 @@ bind d detach-client -P
 # prefix space selects last window (overrides next-layout)
 bind Space last-window
 
+# Switch to or launch an emacs window
+bind e if-shell 'tmux select-window -t emacs' '' "new-window -n emacs emacs"
+
 bind -n C-PgDn next-window
 bind -n C-PgUp previous-window
 

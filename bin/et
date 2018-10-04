@@ -1,0 +1,4 @@
+#!/bin/bash
+# Send the argument to emacsclient and select the "emacs" tmux window.
+# Create the window if it doesn't exist.
+tmux if-shell 'tmux select-window -t emacs' "run-shell '$EDITOR $*'" "new-window -n emacs '$EDITOR $*'"
