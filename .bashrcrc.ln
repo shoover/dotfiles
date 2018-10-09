@@ -1,6 +1,9 @@
 # Keep .bashrc from the platform defaults. Source this into it.
 
+# Fix weird punctuation characters in man under rxvt
 export LANG=en_US.utf8
+# And (mintty|putty) + tmux
+export LC_ALL=C
 
 # Enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -14,10 +17,10 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# colored GCC warnings and errors
+# GCC warnings and errors color support
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# some more ls aliases
+# more ls aliases
 alias ll='ls -l'
 alias la='ls -A'
 alias l='ls -CF'
@@ -55,11 +58,20 @@ function hg_prompt {
 export PS1='\[${GREEN}${BOLD}\]\w\[${D}\]'$'\n\$ '
 
 if grep -q Microsoft /proc/version; then
-    . ~/.bash.wsl.rc
+   # Colors. Clean up highlighted Windows directories
+   # http://www.bigsoft.co.uk/blog/index.php/2008/04/11/configuring-ls_colors
+   LS_COLORS='ow=01;31:di=01;34' ; export LS_COLORS
 fi
 
 if [ "${MSYSTEM:-x}" = "MSYS" ]; then
-    . ~/.bash.msys2.rc
+   alias msbuild='msbuild.exe'
+
+   # I'm using the Windows build of Mercurial from msys2 but the latter eats hg colors.
+   # winpty fixes that.
+   if hash winpty 2>/dev/null; then
+       alias hg='winpty hg'
+       alias msbuild='winpty msbuild.exe'
+   fi
 fi
 
 # Reattach to tmux if not disabled, not already in a session.
