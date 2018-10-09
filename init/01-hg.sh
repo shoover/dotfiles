@@ -9,7 +9,9 @@ if ! [ -x "$(command -v easy_install)" ]; then
     popd
 fi
 
-if ! [ -x "$(command -v pip)" ]; then
+if [ -x "$(command -v pip)" ]; then
+    pip install --user --upgrade pip
+else
     pushd /tmp
     wget https://bootstrap.pypa.io/get-pip.py
     python get-pip.py --user
@@ -19,4 +21,7 @@ fi
 #
 # Source control
 #
-easy_install --user --upgrade mercurial
+
+# Some extensions break with hg 4.7
+# *** failed to import extension hggit: 'module' object has no attribute 'ignore'
+easy_install --user "mercurial==4.6.*"
