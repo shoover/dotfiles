@@ -10,6 +10,9 @@ sudo apt install -y emacs25$emacsSuffix || sudo apt install -y emacs24$emacsSuff
 #
 sudo apt install -y ruby ruby-dev
 
+# Don't waste time install gem CLI docs
+grep no-document ~/.gemrc > /dev/null 2>&1 || echo "gem: --no-document" >> ~/.gemrc
+
 if ! gem spec ffi > /dev/null 2>&1; then
     sudo gem install ffi
 fi
