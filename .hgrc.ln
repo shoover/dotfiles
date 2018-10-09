@@ -63,7 +63,7 @@ record=
 schemes=
 shelve=
 
-hggit=~/dev/hgext/hg-git/hggit
+hggit=
 prompt=~/dev/hgext/hg-prompt/prompt.py
 remotebranches=~/dev/hgext/hg-remotebranches/hg_remotebranches.py
 mercurial_keyring=

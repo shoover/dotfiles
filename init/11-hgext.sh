@@ -1,11 +1,12 @@
-easy_install --user dulwich # for hg-git
+# hg extension packages
+easy_install --user hg-git
+pip install --user hg-evolve
+pip install --user keyring
+pip install --user mercurial_keyring
 
+# hg extensions from source
 mkdir -p $DEST/dev/hgext
 pushd $DEST/dev/hgext
-
-if [ ! -d "hg-git/" ]; then
-    hg clone ssh://hg@bitbucket.org/durin42/hg-git
-fi
 
 if [ ! -d "hg-prompt/" ]; then
     hg clone ssh://hg@bitbucket.org/sjl/hg-prompt
@@ -16,7 +17,3 @@ if [ ! -d "hg-remotebranches/" ]; then
 fi
 
 popd
-
-pip install --user hg-evolve
-pip install --user keyring
-pip install --user mercurial_keyring
