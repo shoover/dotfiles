@@ -1,4 +1,4 @@
-# This breaks ENTER on Ubuntu 16.04 
+# This breaks ENTER on Ubuntu 16.04. Type C-j to work around.
 #$include /etc/inputrc
 
 set completion-ignore-case on
