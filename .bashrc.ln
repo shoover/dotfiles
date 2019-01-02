@@ -1,4 +1,14 @@
-# Keep .bashrc from the platform defaults. Source this into it.
+
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
+
+HISTCONTROL=ignoreboth
+shopt -s histappend
+
+shopt -s checkwinsize
 
 # Fix weird punctuation characters in man under rxvt
 export LANG=en_US.utf8
@@ -58,7 +68,7 @@ function hg_prompt {
 export PS1='\[${GREEN}${BOLD}\]\w\[${D}\]'$'\n\$ '
 
 if grep -q Microsoft /proc/version; then
-   # Colors. Clean up highlighted Windows directories
+   # Clean up highlighted Windows directories
    # http://www.bigsoft.co.uk/blog/index.php/2008/04/11/configuring-ls_colors
    LS_COLORS='ow=01;31:di=01;34' ; export LS_COLORS
 fi
@@ -72,6 +82,11 @@ if [ "${MSYSTEM:-x}" = "MSYS" ]; then
        alias hg='winpty hg'
        alias msbuild='winpty msbuild.exe'
    fi
+fi
+
+# User-local Python installations, e.g. hg.
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
 fi
 
 # Reattach to tmux if not disabled, not already in a session.
