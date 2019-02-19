@@ -9,14 +9,14 @@ if ! [ -x "$(command -v easy_install)" ]; then
     popd
 fi
 
-if [ -x "$(command -v pip)" ]; then
-    pip install --user --upgrade pip
-else
+if ! [ -x "$(command -v pip)" ]; then
     pushd /tmp
     wget https://bootstrap.pypa.io/get-pip.py
     python get-pip.py --user
     popd
 fi
+
+python -m pip install --upgrade pip setuptools wheel
 
 #
 # Source control
