@@ -1,19 +1,29 @@
-
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
       *) return;;
 esac
 
+#
+# Shell
+#
 HISTCONTROL=ignoreboth
 shopt -s histappend
 
 shopt -s checkwinsize
 
+#
+# Encoding
+#
+
 # Fix weird punctuation characters in man under rxvt
 export LANG=en_US.utf8
 # And (mintty|putty) + tmux
 export LC_ALL=C
+
+#
+# Color
+#
 
 # Enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -27,13 +37,21 @@ fi
 # GCC warnings and errors color support
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# more ls aliases
+if grep -q Microsoft /proc/version; then
+   # Clean up highlighted Windows directories
+   # http://www.bigsoft.co.uk/blog/index.php/2008/04/11/configuring-ls_colors
+   LS_COLORS='ow=01;31:di=01;34' ; export LS_COLORS
+fi
+
+#
+# Helpers
+#
+
+# ls shortcuts
 alias ll='ls -l'
 alias la='ls -A'
+alias lal='ls -Al'
 alias l='ls -CF'
-
-export EDITOR='emacsclient -n -a emacs'
-alias e='$EDITOR'
 
 # mkdir and cd in one shot
 function mcd() { [ -n "$1" ] && mkdir -p "$1" && cd "$1"; }
@@ -42,6 +60,24 @@ function mcd() { [ -n "$1" ] && mkdir -p "$1" && cd "$1"; }
 function so {
     eval "$@" |less -I~
 }
+
+if [ "${MSYSTEM:-x}" = "MSYS" ]; then
+   alias msbuild='msbuild.exe'
+
+   # I'm using the Windows build of Mercurial from msys2 but the latter eats hg colors.
+   # winpty fixes that.
+   if hash winpty 2>/dev/null; then
+       alias hg='winpty hg'
+       alias msbuild='winpty msbuild.exe'
+   fi
+fi
+
+# Single command apt update+upgrade
+alias apt-upgrade='sudo apt update && sudo apt upgrade'
+
+#
+# Prompt
+#
 
 # Use xterm-style 256 colors http://misc.flogisoft.com/bash/tip_colors_and_formatting#colors2
 CYAN=$'\e[36;1m'
@@ -64,32 +100,23 @@ function hg_prompt {
 #export PS1='\[${GREEN}${BOLD}\]\w\[${D}\] ${HG_PROMPT}'$'\n\$ '
 export PS1='\[${GREEN}${BOLD}\]\w\[${D}\]'$'\n\$ '
 
-if grep -q Microsoft /proc/version; then
-   # Clean up highlighted Windows directories
-   # http://www.bigsoft.co.uk/blog/index.php/2008/04/11/configuring-ls_colors
-   LS_COLORS='ow=01;31:di=01;34' ; export LS_COLORS
-fi
-
-if [ "${MSYSTEM:-x}" = "MSYS" ]; then
-   alias msbuild='msbuild.exe'
-
-   # I'm using the Windows build of Mercurial from msys2 but the latter eats hg colors.
-   # winpty fixes that.
-   if hash winpty 2>/dev/null; then
-       alias hg='winpty hg'
-       alias msbuild='winpty msbuild.exe'
-   fi
-fi
+#
+# Environment
+#
+export EDITOR='emacsclient -n -a emacs'
+alias e='$EDITOR'
 
 # User-local Python installations, e.g. hg.
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-# Reattach to tmux if not disabled, not already in a session.
+#
+# tmux: Automatically reattach or start. Set NO_TMUX to disable.
+#
 if [ "${NO_TMUX:-x}" = x -a "${TMUX:-x}" = x ]
 then
-    # Coming from SSH or MSYS/Cygwin/WSL (xterm) w/ no Gnome Terminal (VTE_VERSION)
+    # Coming from SSH or MSYS/Cygwin/WSL (xterm), no Gnome Terminal (VTE_VERSION)
     if [ "${SSH_TTY:-x}" != x -o \( "${TERM:0:5}" = "xterm" -a "${VTE_VERSION:-x}" = x \) ]
     then
         echo "Checking tmux sessions..."
