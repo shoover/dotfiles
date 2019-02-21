@@ -14,11 +14,12 @@ set -x
 
 cd /tmp
 
+# Download a static archive to bootstrap.
 wget -O dotfiles.tar.gz https://bitbucket.org/shoover/dotfiles/get/default.tar.gz
 mkdir dotfiles
 tar xzf dotfiles.tar.gz --strip 1 -C dotfiles
 
-# Copy archive and install dotfiles only, for non-root, quick setup
+# Copy archive and install dotfiles only, for quick setup and no hg
 if [ "$selection" == "dotfiles" ]
 then
     cp -R dotfiles $dst/
@@ -34,14 +35,19 @@ then
     exit 1
 fi
 
-# Continue with hg checkout and package installation
-
+# Bootstrap tools to set up an hg working copy.
 bash -c dotfiles/init/00-platform.sh
 bash -c dotfiles/init/01-hg.sh
 
+# It's too soon to source .bashrc, but we need hg on the PATH.
+if [ -d "$HOME/.local/bin" ] && [[ ":$PATH:" != *":$HOME/.local/bin:"* ]] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
 rm -rf /tmp/dotfiles
 
+# Clone the repo and install everything.
 mkdir -p $dst
 cd $dst
-hg clone ssh://hg@bitbucket.org/shoover/dotfiles
+hg clone https://bitbucket.org/shoover/dotfiles
 bash -x dotfiles/init/install.sh $dst

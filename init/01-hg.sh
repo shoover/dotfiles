@@ -16,7 +16,7 @@ if ! [ -x "$(command -v pip)" ]; then
     popd
 fi
 
-python -m pip install --upgrade pip setuptools wheel
+python -m pip install --user --upgrade pip setuptools wheel
 
 #
 # Source control

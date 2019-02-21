@@ -9,11 +9,11 @@ mkdir -p $DEST/dev/hgext
 pushd $DEST/dev/hgext
 
 if [ ! -d "hg-prompt/" ]; then
-    hg clone ssh://hg@bitbucket.org/sjl/hg-prompt
+    hg clone https://bitbucket.org/sjl/hg-prompt
 fi
 
 if [ ! -d "hg-remotebranches/" ]; then
-    hg clone ssh://hg@bitbucket.org/durin42/hg-remotebranches
+    hg clone https://bitbucket.org/durin42/hg-remotebranches
 fi
 
 popd

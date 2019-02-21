@@ -1,3 +1,5 @@
+# -*- mode: sh;-*-
+
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -107,7 +109,7 @@ export EDITOR='emacsclient -n -a emacs'
 alias e='$EDITOR'
 
 # User-local Python installations, e.g. hg.
-if [ -d "$HOME/.local/bin" ] ; then
+if [ -d "$HOME/.local/bin" ] && [[ ":$PATH:" != *":$HOME/.local/bin:"* ]] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
