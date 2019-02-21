@@ -6,7 +6,6 @@
 #
 
 # Prefix = C-g, so I get back C-b to move back one character.
-#set -g prefix ^g
 set -g prefix `
 bind-key ` send-prefix
 
@@ -47,33 +46,33 @@ bind -Tcopy-mode WheelDownPane send -N3 -X scroll-down
 bind -Tcopy-mode MouseUp3Pane send -X cancel # Right click quit copy-mode
 bind -Tcopy-mode [            send -X cancel # [ quit copy-mode
 
-# M-w copies marked text to Windows clipboard.
+# M-w copies marked text to Windows clipboard in MSYS/WSL.
 if-shell 'uname | grep -qi MSYS' 'bind-key -n -Tcopy-mode M-w send -X copy-pipe "cat > /dev/clipboard"'
+if-shell 'grep -q Microsoft /proc/version' 'bind-key -n -Tcopy-mode M-w send -X copy-pipe "cat | clip.exe"'
 
 # Dragging the mouse copies to clipboard.
 #bind -Tcopy-mode MouseDragEnd1Pane send -X copy-pipe "cat > /dev/clipboard" \; send -X clear-selection
 
-# What I really want is for drag release to copy to the system clipboard, but
-# I can't get it to work because begin-selection from a mouse event goes into
-# a copy drag mode that is hardcoded to copy-selection (no pipe) on release.
+# I want drag release to copy to the system clipboard, but I can't get
+# it to work because begin-selection from a mouse event goes into a
+# copy drag mode that is hardcoded to copy-selection (no pipe) on
+# release.
 #
-# Workaround: Use shift+drag to bypass tmux and use xterm select. Shift+Insert
-# to paste.
+# Workaround: Use Shift+drag to bypass tmux and let xterm select.
+# Shift+Insert to paste.
 
 #
 # Session and window settings
 #
 
+# I'm setting no colors in tmux so different terminal configurations
+# can come through and look consistent regardless of tmux config.
+# Be sure to TERM=putty-256color or xterm-256color via terminal
+# settings outside tmux, or colors will look bad in Emacs.
 set -g default-terminal "tmux-256color"
-
-set -g window-style "bg=colour232,fg=white" # Almost black bg, just to take the edge off
 
 # Count sessions starting at 1
 set -g base-index 1
-
-# Try to work better with Windows console apps. But then it eats my PS1
-# and messes up hg prompt colors?
-#set -s default-command "winpty bash"
 
 # Title bar
 set -g set-titles on
@@ -87,22 +86,21 @@ set -g set-titles-string '#(whoami)@#h' #' #(curl ipecho.net/plain;echo)'
 #
 # Status bar
 #
-set -g status-style "bg=colour234" # dark gray
+set -g status-style "reverse"
 
-# Just the session name on the left
-set -g status-left "#[fg=green][#S] "
+# Left: session name
+set -g status-left "[#S] "
 set -g status-left-length 15
 
-# User/host/date on the right
-set -g status-right '#[fg=green]#(whoami)@#(hostname) #[fg=yellow][%a %d %b %R]'
+# Right: user/host/date
+set -g status-right '#(whoami)@#(hostname) [%a %d %b %R]'
 set -g status-right-length 60
 
-# Typical window index, title, and flags in the middle
-# blue 75 is readable on dark gray. purple 98 works ok, too.
+# Middle: Typical window index, title, and flags
 set -g status-justify left
-set -g window-status-current-format "#[fg=colour75,bold,underscore]#I:#W#F"
-set -g window-status-format "#[fg=colour75]#I:#W#F"
-set -g window-status-separator '|'
+set -g window-status-current-format "#[bold,underscore]#I:#W#F"
+set -g window-status-format "#I:#W#F"
+set -g window-status-separator ' | '
 
 # More time to read error messages
 set -g display-time 2000
