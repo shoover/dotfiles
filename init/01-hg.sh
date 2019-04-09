@@ -22,6 +22,4 @@ python -m pip install --user --upgrade pip setuptools wheel
 # Source control
 #
 
-# Some extensions break with hg 4.7
-# *** failed to import extension hggit: 'module' object has no attribute 'ignore'
-easy_install --user "mercurial==4.6.*"
+easy_install --user -U mercurial

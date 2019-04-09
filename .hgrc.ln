@@ -4,7 +4,6 @@ ignore=~/.hgignore
 
 [alias]
 ; Aliases from Augie (https://bitbucket.org/durin42/dotfiles).
-; upstream() comes from the remotebranches extension.
 ll=log --graph --style compact --limit 6 -r 'sort((::. or bookmark() or heads(upstream())), "-rev")'
 ubook=log -r 'bookmark() and (upstream() or obsolete())' --template '{bookmarks} {rev}\n'
 utip=log -r 'limit(heads(upstream()), 1)'
@@ -25,6 +24,7 @@ changelog2=log -r "first(limit(tag('re:$1'), 2))::last(tag('re:$1'))"
 
 [revsetalias]
 local=ancestors(.) and not upstream()
+upstream=::remotenames()
 
 ;;;
 ; smartlog config from Augie
@@ -60,14 +60,17 @@ mq=
 progress=
 rebase=
 record=
+remotenames=
 schemes=
 shelve=
 
 hggit=
 prompt=~/dev/hgext/hg-prompt/prompt.py
-remotebranches=~/dev/hgext/hg-remotebranches/hg_remotebranches.py
 mercurial_keyring=
 evolve=
+
+[experimental]
+remotenames = yes
 
 [subrepos]
 svn:allowed=true
