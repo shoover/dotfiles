@@ -16,6 +16,7 @@ cd /tmp
 
 # Download a static archive to bootstrap.
 wget -O dotfiles.tar.gz https://bitbucket.org/shoover/dotfiles/get/default.tar.gz
+rm -rf dotfiles
 mkdir dotfiles
 tar xzf dotfiles.tar.gz --strip 1 -C dotfiles
 
