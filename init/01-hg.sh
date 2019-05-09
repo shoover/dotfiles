@@ -16,4 +16,4 @@ python -m pip install --user --upgrade pip
 # Source control
 #
 
-pip install --user --upgrade mercurial
+python -m pip install --user --upgrade mercurial
