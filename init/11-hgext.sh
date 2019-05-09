@@ -1,5 +1,5 @@
 # hg extension packages
-easy_install --user hg-git
+pip install --user hg-git
 pip install --user hg-evolve
 pip install --user keyring
 pip install --user mercurial_keyring
