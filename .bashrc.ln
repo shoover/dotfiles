@@ -113,6 +113,10 @@ if [ -d "$HOME/.local/bin" ] && [[ ":$PATH:" != *":$HOME/.local/bin:"* ]] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+if [ -f "$HOME/.bashrc.local.rc" ] ; then
+    source "$HOME/.bashrc.local.rc"
+fi
+
 #
 # tmux: Automatically reattach or start. Set NO_TMUX to disable.
 #
@@ -133,4 +137,9 @@ then
         #       (tmux new-session -s remote) ) && exit 0
         # echo "tmux failed to start"
     fi
+fi
+
+if [ -d "$HOME/.rbenv/bin" ] ; then
+    export PATH="$HOME/.rbenv/bin:$PATH"
+    eval "$(rbenv init -)"
 fi
