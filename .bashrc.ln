@@ -117,6 +117,8 @@ if [ -f "$HOME/.bashrc.local.rc" ] ; then
     source "$HOME/.bashrc.local.rc"
 fi
 
+source /usr/share/doc/fzf/examples/key-bindings.bash
+
 #
 # tmux: Automatically reattach or start. Set NO_TMUX to disable.
 #
