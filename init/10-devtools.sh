@@ -1,9 +1,24 @@
 #
 # The text editor. Full package for desktop, -nox for servers.
 #
-emacsSuffix=""
-ls /usr/bin/*session | egrep -i "gnome|kde[^v]|mate|cinnamon|lxde|xfce|jwm" || emacsSuffix=-nox
-sudo apt install -y emacs25$emacsSuffix || sudo apt install -y emacs24$emacsSuffix
+if ! [ -x "$(command -v emacs)" ]; then
+    pushd /tmp
+
+    emacs=emacs-27.1
+    wget http://ftpmirror.gnu.org/emacs/$emacs.tar.xz
+    tar xf $emacs.tar.xz
+
+    cd $emacs
+    ./configure --with-gnutls=ifavailable
+    make
+    sudo make install
+
+    rm -f $emacs.tar.xz
+    rm -rf $emacs
+
+    popd
+fi
+
 
 #
 # Ruby
