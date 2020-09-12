@@ -3,17 +3,17 @@
 #
 sudo apt install -y python2.7 python2.7-dev
 
-if ! [ -x "$(command -v pip)" ]; then
+if ! [ -x "$(command -v pip2.7)" ]; then
     pushd /tmp
     wget https://bootstrap.pypa.io/get-pip.py
-    python get-pip.py --user
+    python2.7 get-pip.py --user
     popd
 fi
 
-python -m pip install --user --upgrade pip
+python2.7 -m pip install --user --upgrade pip
 
 #
 # Source control
 #
 
-python -m pip install --user --upgrade mercurial
+python2.7 -m pip install --user --upgrade mercurial
