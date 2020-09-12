@@ -9,7 +9,7 @@ mkdir -p $DEST/dev/hgext
 pushd $DEST/dev/hgext
 
 if [ ! -d "hg-prompt/" ]; then
-    hg clone https://bitbucket.org/sjl/hg-prompt
+    hg clone https://code.shawnhoover.dev/hg-prompt
 fi
 
 popd

@@ -15,7 +15,7 @@ set -x
 cd /tmp
 
 # Download a static archive to bootstrap.
-wget -O dotfiles.tar.gz https://bitbucket.org/shoover/dotfiles/get/default.tar.gz
+wget -O dotfiles.tar.gz https://code.shawnhoover.dev/dotfiles/archive/tip.tar.gz
 rm -rf dotfiles
 mkdir dotfiles
 tar xzf dotfiles.tar.gz --strip 1 -C dotfiles
@@ -50,5 +50,5 @@ rm -rf /tmp/dotfiles
 # Clone the repo and install everything.
 mkdir -p $dst
 cd $dst
-hg clone https://bitbucket.org/shoover/dotfiles
+hg clone https://code.shawnhoover.dev/dotfiles
 bash -x dotfiles/init/install.sh $dst
