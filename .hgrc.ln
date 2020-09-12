@@ -65,7 +65,6 @@ schemes=
 shelve=
 
 hggit=
-prompt=~/dev/hgext/hg-prompt/prompt.py
 mercurial_keyring=
 evolve=
 

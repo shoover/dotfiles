@@ -2,6 +2,8 @@
 # The text editor. Full package for desktop, -nox for servers.
 #
 if ! [ -x "$(command -v emacs)" ]; then
+    sudo apt install -y gnutls-dev
+
     pushd /tmp
 
     emacs=emacs-27.1
@@ -25,7 +27,7 @@ fi
 #
 sudo apt install -y ruby ruby-dev
 
-# Don't waste time install gem CLI docs
+# Don't spend time installing gem CLI docs
 grep no-document ~/.gemrc > /dev/null 2>&1 || echo "gem: --no-document" >> ~/.gemrc
 
 if ! gem spec ffi > /dev/null 2>&1; then
