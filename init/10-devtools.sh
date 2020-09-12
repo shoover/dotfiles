@@ -2,7 +2,7 @@
 # The text editor. Full package for desktop, -nox for servers.
 #
 if ! [ -x "$(command -v emacs)" ]; then
-    sudo apt install -y gnutls-dev
+    sudo apt install -y gnutls-bin gnutls-dev
 
     pushd /tmp
 
@@ -11,7 +11,7 @@ if ! [ -x "$(command -v emacs)" ]; then
     tar xf $emacs.tar.xz
 
     cd $emacs
-    ./configure --with-gnutls=ifavailable
+    ./configure
     make
     sudo make install
 
