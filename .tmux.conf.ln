@@ -76,6 +76,8 @@ set -g default-terminal "tmux-256color"
 # Count sessions starting at 1
 set -g base-index 1
 
+set-option -g history-limit 5000
+
 # Title bar
 set -g set-titles on
 set -g set-titles-string '#(whoami)@#h' #' #(curl ipecho.net/plain;echo)'
