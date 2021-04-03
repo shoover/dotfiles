@@ -6,7 +6,7 @@ since WSL does almost everything).
 To bootstrap from Bitbucket to a Mercurial checkout in $HOME:
 
 ```
-bash <(curl -s https://code.shawnhoover.dev/dotfiles/raw-file/tip/init/bootstrap.sh)
+bash <(curl -s https://raw.githubusercontent.com/shoover/dotfiles/main/init/bootstrap.sh)
 ```
 
 The script prompts before overwriting any dotfiles.
