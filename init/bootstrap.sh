@@ -20,7 +20,7 @@ rm -rf dotfiles
 mkdir dotfiles
 tar xzf dotfiles.tar.gz --strip 1 -C dotfiles
 
-# Copy archive and install dotfiles only, for quick setup and no hg
+# Copy archive and install dotfiles only, for quick setup and no checkout
 if [ "$selection" == "dotfiles" ]
 then
     cp -R dotfiles $dst/
