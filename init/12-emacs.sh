@@ -1,7 +1,7 @@
 pushd $DEST
 
 if ! [ -d "emacs" ]; then
-    hg clone https://code.shawnhoover.dev/emacs.d emacs
+    git clone https://github.com/shoover/emacs.d.git emacs
 fi
 
 emacs --load emacs/bootstrap.el --batch --funcall my-bootstrap-packages
