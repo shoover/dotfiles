@@ -1,0 +1,15 @@
+if [ ! -v LS_COLORS ] ; then
+    if (( $+commands[dircolors] )) && [ -f "$HOME/.dircolors" ] ; then
+        eval "$(dircolors $HOME/.dircolors)"
+    else
+        LS_COLORS='ow=01;31:di=01;34' ; export LS_COLORS
+    fi
+fi
+
+ZSH_TMUX_AUTOSTART="true"
+plugins=(git tmux)
+
+NEWLINE=$'\n'
+PROMPT="${PROMPT}${NEWLINE}> "
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
