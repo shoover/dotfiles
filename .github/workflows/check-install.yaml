@@ -23,8 +23,6 @@ jobs:
     steps:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-      - name: debug ref name
-        run: echo GITHUB_REF_NAME=$GITHUB_REF_NAME; env
       - name: Check
         uses: docker/build-push-action@v4
         with:

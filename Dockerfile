@@ -34,7 +34,8 @@ RUN overwrite_all=true init/install.sh
 FROM setup as bootstrap
 ARG GITHUB_REF_NAME
 ENV GITHUB_REF_NAME ${GITHUB_REF_NAME}
+ARG GITHUB_REF
+ENV GITHUB_REF ${GITHUB_REF}
+
 RUN sudo apt install -y curl
-RUN echo GITHUB_REF_NAME=$GITHUB_REF_NAME
-RUN env
-RUN curl -s https://raw.githubusercontent.com/shoover/dotfiles/$GITHUB_REF_NAME/init/bootstrap.sh | bash
+RUN GITHUB_REF=${GITHUB_REF} curl -s https://raw.githubusercontent.com/shoover/dotfiles/${GITHUB_REF_NAME}/init/bootstrap.sh | bash
