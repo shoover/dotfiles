@@ -1,4 +1,4 @@
-sudo apt install -y openjdk-8-jdk-headless
+sudo apt install -y openjdk-11-jdk-headless
 
 if ! [ -x "$(command -v lein)" ]; then
     curl -O https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein
