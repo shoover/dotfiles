@@ -7,9 +7,9 @@ set -e
 #
 if ! [ -x "$(command -v emacs)" ]; then
     # Install the copious emacs build deps, with NO prompt for postfix config
-    sudo DEBIAN_FRONTEND=noninteractive apt build-dep -yq emacs
+    sudo DEBIAN_FRONTEND=noninteractive apt-get build-dep -yq emacs
 
-    sudo apt install -y gnutls-bin gnutls-dev
+    sudo apt-get install -y gnutls-bin gnutls-dev
 
     pushd /tmp
 
@@ -33,12 +33,12 @@ fi
 #
 # Python
 #
-sudo apt install -y python3 python3-dev python3-pip
+sudo apt-get install -y python3 python3-dev python3-pip
 
 #
 # Ruby
 #
-sudo apt install -y ruby ruby-dev
+sudo apt-get install -y ruby ruby-dev
 
 # Don't spend time installing gem CLI docs
 grep no-document ~/.gemrc > /dev/null 2>&1 || echo "gem: --no-document" >> ~/.gemrc
@@ -51,4 +51,4 @@ fi
 # Source control
 #
 pip3 install --user --upgrade mercurial
-sudo apt install -y subversion
+sudo apt-get install -y subversion

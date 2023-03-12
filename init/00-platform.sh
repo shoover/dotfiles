@@ -1,9 +1,9 @@
-sudo apt update
+sudo apt-get update
 
-sudo apt install -y curl
+sudo apt-get install -y curl
 
 #
 # C compilers
 #
-sudo apt install -y build-essential
-sudo apt install -y clang
+sudo apt-get install -y build-essential
+sudo apt-get install -y clang
