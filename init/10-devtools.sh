@@ -1,19 +1,28 @@
+#!/bin/bash
+
+set -e
+
 #
 # The text editor. Full package for desktop, -nox for servers.
 #
 if ! [ -x "$(command -v emacs)" ]; then
+    # Install the copious emacs build deps, with NO prompt for postfix config
+    sudo DEBIAN_FRONTEND=noninteractive apt build-dep -yq emacs
+
     sudo apt install -y gnutls-bin gnutls-dev
 
     pushd /tmp
 
-    emacs=emacs-27.1
+    emacs=emacs-28.2
     wget http://ftpmirror.gnu.org/emacs/$emacs.tar.xz
     tar xf $emacs.tar.xz
 
-    cd $emacs
+    pushd $emacs
+    ./autogen.sh
     ./configure
-    make
+    make -j$(proc)
     sudo make install
+    popd
 
     rm -f $emacs.tar.xz
     rm -rf $emacs
