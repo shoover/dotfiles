@@ -38,4 +38,4 @@ ARG GITHUB_REF
 ENV GITHUB_REF ${GITHUB_REF}
 
 RUN sudo apt-get install -y curl
-RUN curl -s https://raw.githubusercontent.com/shoover/dotfiles/${GITHUB_REF_NAME}/init/bootstrap.sh | bash
+RUN export overwrite_all=true && curl -s https://raw.githubusercontent.com/shoover/dotfiles/${GITHUB_REF_NAME}/init/bootstrap.sh | bash

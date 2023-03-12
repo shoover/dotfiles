@@ -39,7 +39,6 @@ then
     exit 1
 fi
 
-ls -l dotfiles dotfiles/init
 bash -c dotfiles/init/00-platform.sh
 bash -c dotfiles/init/01-git.sh
 
