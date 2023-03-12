@@ -32,18 +32,12 @@ fi
 
 if [ "$selection" != "all" ]
 then
-    echo Invalid selection: $selection
+    echo Unrecognized selection: $selection
     exit 1
 fi
 
-# Bootstrap tools to set up an hg working copy.
 bash -c dotfiles/init/00-platform.sh
-bash -c dotfiles/init/01-hg.sh
-
-# It's too soon to source .bashrc, but we need hg on the PATH.
-if [ -d "$HOME/.local/bin" ] && [[ ":$PATH:" != *":$HOME/.local/bin:"* ]] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
+bash -c dotfiles/init/01-git.sh
 
 rm -rf /tmp/dotfiles
 
