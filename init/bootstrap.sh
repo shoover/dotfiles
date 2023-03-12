@@ -7,6 +7,8 @@
 dst=$(readlink -f ${1:-$HOME})
 selection=${2:-all}
 
+ref=${GITHUB_REF:-refs/heads/main}
+
 echo Bootstrap installing dotfiles to $dst
 
 set -e
@@ -15,7 +17,7 @@ set -x
 cd /tmp
 
 # Download a static archive to bootstrap.
-wget -O dotfiles.tar.gz https://github.com/shoover/dotfiles/archive/refs/heads/main.tar.gz
+wget -O dotfiles.tar.gz https://github.com/shoover/dotfiles/archive/${ref}.tar.gz
 rm -rf dotfiles
 mkdir dotfiles
 tar xzf dotfiles.tar.gz --strip 1 -C dotfiles
@@ -45,4 +47,6 @@ rm -rf /tmp/dotfiles
 mkdir -p $dst
 cd $dst
 git clone https://github.com/shoover/dotfiles.git
-bash -x dotfiles/init/install.sh $dst
+cd dotfiles
+git checkout ${ref}
+bash -x init/install.sh $dst
