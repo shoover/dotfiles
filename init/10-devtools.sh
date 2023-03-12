@@ -30,6 +30,10 @@ if ! [ -x "$(command -v emacs)" ]; then
     popd
 fi
 
+#
+# Python
+#
+sudo apt install -y python3 python3-dev python3-pip
 
 #
 # Ruby
@@ -46,5 +50,5 @@ fi
 #
 # Source control
 #
-sudo apt install -y git
+pip3 install --user --upgrade mercurial
 sudo apt install -y subversion
