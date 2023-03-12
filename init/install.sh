@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Install all the dotfiles and run all the installer scripts.
 #
 # Pass the destination dir as an optional argument. Installs to $HOME by default.
@@ -7,7 +9,7 @@
 # Compliments to https://github.com/holman/dotfiles/blob/master/script/bootstrap
 
 set -e
-#set -x
+set -x
 
 DEST=$(readlink -f ${1:-$HOME})
 selection=${2:-all}
@@ -121,7 +123,9 @@ link_file () {
 #
 
 function install_dotsymlinks {
-    local overwrite_all=false backup_all=false skip_all=false
+    local overwrite_all=${overwrite_all:-false}
+    local backup_all=${backup_all:-false}
+    local skip_all=${skip_all:-false}
 
     for src in $(find -H "$DOTFILES" -maxdepth 1 -name '*.ln' -not -path '*/.hg/*')
     do
