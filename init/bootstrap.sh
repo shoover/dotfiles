@@ -8,6 +8,7 @@ dst=$(readlink -f ${1:-$HOME})
 selection=${2:-all}
 
 ref=${GITHUB_REF:-refs/heads/main}
+ref_name=${GITHUB_REF_NAME:-main}
 
 echo Bootstrap installing dotfiles to $dst
 
@@ -49,5 +50,5 @@ mkdir -p $dst
 cd $dst
 git clone https://github.com/shoover/dotfiles.git
 cd dotfiles
-git checkout ${ref}
+git checkout ${ref_name}
 bash -x init/install.sh $dst

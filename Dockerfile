@@ -4,15 +4,15 @@ ARG TARGETARCH
 
 # Create an interactive, non-expiring user with passwordless sudo. Log in using
 # SSH keys.
-RUN apt update && apt install -y sudo
+RUN apt-get update && apt-get install -y sudo
 RUN groupadd --gid 1000 $USER
 RUN useradd --system --uid 1000 --gid $USER --groups sudo --create-home --home-dir /home/$USER --shell /bin/bash $USER
 RUN echo "$USER ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-# Allow apt build-dep
+# Allow apt-get build-dep
 RUN sed -i '/^#\sdeb-src /s/^# *//' "/etc/apt/sources.list"
 
-RUN apt update && apt install -y wget
+RUN apt-get update && apt-get install -y wget
 USER $USER
 WORKDIR /home/$USER
 
@@ -37,5 +37,5 @@ ENV GITHUB_REF_NAME ${GITHUB_REF_NAME}
 ARG GITHUB_REF
 ENV GITHUB_REF ${GITHUB_REF}
 
-RUN sudo apt install -y curl
-RUN GITHUB_REF=${GITHUB_REF} curl -s https://raw.githubusercontent.com/shoover/dotfiles/${GITHUB_REF_NAME}/init/bootstrap.sh | bash
+RUN sudo apt-get install -y curl
+RUN curl -s https://raw.githubusercontent.com/shoover/dotfiles/${GITHUB_REF_NAME}/init/bootstrap.sh | bash
