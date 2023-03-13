@@ -20,6 +20,9 @@ jobs:
 
   bootstrap:
     runs-on: "ubuntu-latest"
+    strategy:
+      matrix:
+        distro: ["ubuntu", "debian"]
     steps:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -31,3 +34,4 @@ jobs:
           build-args: |
             "GITHUB_REF_NAME=${{ github.ref_name }}"
             "GITHUB_REF=${{ github.ref }}"
+            "DISTRO=${{ matrix.distro }}"
