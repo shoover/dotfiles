@@ -66,10 +66,7 @@ function so {
 if [ "${MSYSTEM:-x}" = "MSYS" ]; then
    alias msbuild='msbuild.exe'
 
-   # I'm using the Windows build of Mercurial from msys2 but the latter eats hg colors.
-   # winpty fixes that.
    if hash winpty 2>/dev/null; then
-       alias hg='winpty hg'
        alias msbuild='winpty msbuild.exe'
    fi
 fi
@@ -94,12 +91,6 @@ D=$'\e[0m'
 BOLD=$'\e[1m'
 BOLD_D=$'\e[21m' # reset bold
 
-function hg_prompt {
-    hg prompt "${GREEN}{root|basename}{ ${BLUE}{branch|quiet}}{ ${D}${DARK_BLUE}[{bookmark}]} ${D}${ORANGE}@r{rev}{status}{update}{ ${DARK_BLUE}{patch}}{ ${DARK_BLUE}mq({patch|applied|quiet}/}{{patch|count|quiet})} ${D}{${GREEN}({tags})}${D}" 2> /dev/null
-}
-
-#export PROMPT_COMMAND='HG_PROMPT="$(hg_prompt)"'
-#export PS1='\[${GREEN}${BOLD}\]\w\[${D}\] ${HG_PROMPT}'$'\n\$ '
 export PS1='\[${GREEN}${BOLD}\]\w\[${D}\]'$'\n\$ '
 
 #
@@ -108,7 +99,7 @@ export PS1='\[${GREEN}${BOLD}\]\w\[${D}\]'$'\n\$ '
 export EDITOR='emacsclient -n -a emacs'
 alias e='$EDITOR'
 
-# User-local Python installations, e.g. hg.
+# User-local Python installations.
 if [ -d "$HOME/.local/bin" ] && [[ ":$PATH:" != *":$HOME/.local/bin:"* ]] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi

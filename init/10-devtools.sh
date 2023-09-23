@@ -6,9 +6,8 @@ set -e
 # The text editor. Full package for desktop, -nox for servers.
 #
 if ! [ -x "$(command -v emacs)" ]; then
-    # Install the copious emacs build deps, with NO prompt for postfix config
+    # Install the copious emacs build deps. "Quiet" to disable prompt for postfix config.
     sudo DEBIAN_FRONTEND=noninteractive apt-get build-dep -yq emacs
-
     sudo apt-get install -y gnutls-bin gnutls-dev
 
     pushd /tmp
@@ -46,9 +45,3 @@ grep no-document ~/.gemrc > /dev/null 2>&1 || echo "gem: --no-document" >> ~/.ge
 if ! gem spec ffi > /dev/null 2>&1; then
     sudo gem install ffi
 fi
-
-#
-# Source control
-#
-pip3 install --user --upgrade mercurial
-sudo apt-get install -y subversion

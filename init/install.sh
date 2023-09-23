@@ -127,7 +127,7 @@ function install_dotsymlinks {
     local backup_all=${backup_all:-false}
     local skip_all=${skip_all:-false}
 
-    for src in $(find -H "$DOTFILES" -maxdepth 1 -name '*.ln' -not -path '*/.hg/*')
+    for src in $(find -H "$DOTFILES" -maxdepth 1 -name '*.ln' -not -path '*/.git/*')
     do
         dst="$DEST/$(basename "${src%.*}")"
         link_file "$src" "$dst"
@@ -135,7 +135,7 @@ function install_dotsymlinks {
 }
 
 function install_dotcopies {
-    for src in $(find -H "$DOTFILES" -maxdepth 1 -name '*.cp' -not -path '*/.hg/*')
+    for src in $(find -H "$DOTFILES" -maxdepth 1 -name '*.cp' -not -path '*/.git/*')
     do
         dst="$DEST/$(basename "${src%.*}")"
         if [ -f "$dst" ]; then
