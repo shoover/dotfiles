@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Install dotfile tools.
+# Pass the destination dir as an optional argument. Installs to $HOME by default.
+#
+# install/tools [DEST:$HOME]
+#
+
+set -e
+
+DEST=$(readlink -f ${1:-$HOME})
+
+DOTFILES=$(cd "$(dirname "$BASH_SOURCE")/.."; pwd -P)
+
+function install_scripts {
+    export DEST
+    export DOTFILES
+    find -H "$DOTFILES/tools" -name "[0-9][0-9]-*.sh" | sort -n | while read script ; do
+        echo ''
+        echo Installing $script
+        bash -x $script
+    done
+}
+
+install_scripts

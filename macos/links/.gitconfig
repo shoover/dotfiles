@@ -1,0 +1,9 @@
+[pager]
+	stash = false
+[user]
+	email = shawn@shawnhoover.dev
+	name = Shawn Hoover
+[core]
+	autocrlf = false
+[init]
+	defaultBranch = main
