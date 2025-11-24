@@ -98,8 +98,13 @@ link_file () {
 
         if [ "$backup" == "true" ]
         then
-            mv "$dst" "${dst}.backup"
-            success "moved $dst to ${dst}.backup"
+            # Back up existing entry with a timestamped suffix to sort of
+            # snapshot changes avoid clobbering (best effort).
+            local timestamp backup_path
+            timestamp=$(date +"%Y%m%d.%H%M")
+            backup_path="${dst}.${timestamp}.bak"
+            mv "$dst" "$backup_path"
+            success "moved $dst to $backup_path"
         fi
 
         if [ "$skip" == "true" ]
