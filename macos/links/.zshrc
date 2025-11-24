@@ -1,3 +1,5 @@
+# .zshrc linked from dotfiles. Add local overrides to ~/.zshrc.local.
+
 export ZSH="$HOME/.oh-my-zsh"
 
 ZSH_THEME="robbyrussell"
@@ -26,3 +28,6 @@ FNM_PATH="/opt/homebrew/opt/fnm/bin"
 if [ -d "$FNM_PATH" ]; then
   eval "`fnm env`"
 fi
+
+# Local overrides
+[ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
