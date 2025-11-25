@@ -18,7 +18,7 @@ function install_scripts {
     find -H "$DOTFILES/tools" -name "[0-9][0-9]-*.sh" | sort -n | while read script ; do
         echo ''
         echo Installing $script
-        bash -x $script
+        bash -x $script </dev/tty
     done
 }
 
