@@ -33,5 +33,4 @@ jobs:
           push: false
           build-args: |
             "GITHUB_REF_NAME=${{ github.ref_name }}"
-            "GITHUB_REF=${{ github.ref }}"
             "DISTRO=${{ matrix.distro }}"

@@ -12,7 +12,7 @@ if ! [ -x "$(command -v emacs)" ]; then
 
     pushd /tmp
 
-    emacs=emacs-29.1
+    emacs=emacs-30.2
     wget http://ftpmirror.gnu.org/emacs/$emacs.tar.xz
     tar xf $emacs.tar.xz
 
