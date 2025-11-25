@@ -10,6 +10,7 @@ jobs:
   install:
     runs-on: "ubuntu-latest"
     steps:
+      - uses: actions/checkout@v6
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Check
@@ -22,6 +23,7 @@ jobs:
       matrix:
         distro: ["ubuntu", "debian"]
     steps:
+      - uses: actions/checkout@v6
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Check
