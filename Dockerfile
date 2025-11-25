@@ -11,7 +11,7 @@ ARG TARGETARCH
 
 # Allow apt-get build-dep. Debian intentionally excludes deb-src lines from docker builds,
 # which breaks breaks apt-get build-dep emacs.
-RUN find /etc/apt/sources.list* -type f -exec sed -i 'p; s/^deb /deb-src /' '{}' +
+RUN find /etc/apt/sources.list* -type f -exec sed -i 's/^Types: deb$/Types: deb deb-src/' {} +
 
 RUN apt-get update && apt-get install -y sudo wget
 
