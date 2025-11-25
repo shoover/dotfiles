@@ -13,10 +13,8 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Check
-        uses: docker/build-push-action@v4
-        with:
-          target: install
-          push: false
+        run: |
+          DISTRO=ubuntu make test/install
 
   bootstrap:
     runs-on: "ubuntu-latest"
@@ -27,10 +25,5 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
       - name: Check
-        uses: docker/build-push-action@v4
-        with:
-          target: bootstrap
-          push: false
-          build-args: |
-            "GITHUB_REF_NAME=${{ github.ref_name }}"
-            "DISTRO=${{ matrix.distro }}"
+        run: |
+          GITHUB_REF_NAME=${{ github.ref_name }} DISTRO=${{ matrix.distro }} make test/bootstrap
