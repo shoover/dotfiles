@@ -36,4 +36,4 @@ jobs:
       - uses: actions/checkout@v6
       - name: Check
         run: |
-          make macos/install
+          backup_all=true make macos/install
