@@ -12,10 +12,14 @@ DEST=$(readlink -f ${1:-$HOME})
 
 DOTFILES=$(cd "$(dirname "$BASH_SOURCE")/.."; pwd -P)
 
+BIN="$DEST/bin"
+
+mkdir -p "$BIN"
+
 function install_dest_bin {
     for src in $(find -H "$DOTFILES/bin" -maxdepth 1 -type f)
     do
-        dst="$DEST/bin/$(basename "${src}")"
+        dst="$BIN/$(basename "${src}")"
         if [ -L "$dst" ]; then
             echo Link "$dst" exists, skipping link
         elif [ -f "$dst" ]; then
