@@ -7,7 +7,7 @@ concurrency:
   group: '${{ github.workflow }} @ ${{ github.ref }}'
 
 jobs:
-  install:
+  install-linux:
     runs-on: "ubuntu-latest"
     steps:
       - uses: actions/checkout@v6
@@ -17,7 +17,7 @@ jobs:
         run: |
           make test/install DISTRO=ubuntu
 
-  bootstrap:
+  bootstrap-linux:
     runs-on: "ubuntu-latest"
     strategy:
       matrix:
@@ -29,3 +29,11 @@ jobs:
       - name: Check
         run: |
           make test/bootstrap GITHUB_REF_NAME=${{ github.ref_name }} DISTRO=${{ matrix.distro }}
+
+  install-macos:
+    runs-on: "macos-latest"
+    steps:
+      - uses: actions/checkout@v6
+      - name: Check
+        run: |
+          make macos/install
