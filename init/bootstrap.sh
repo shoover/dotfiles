@@ -40,6 +40,10 @@ then
     exit 1
 fi
 
+# Don't prompt for tzdata region, postfix config
+export DEBIAN_FRONTEND=noninteractive
+
+# Bootstrapping git is not required in recent ubuntu docker images. Not sure about VPS images.
 bash -c dotfiles/init/00-platform.sh
 bash -c dotfiles/init/01-git.sh
 
