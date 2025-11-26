@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # ./bootstrap.sh [DEST|$HOME] [dotfiles|all]
 # ./bootstrap.sh                  # default install files to HOME, run installers, clone repo
 # ./bootstrap.sh $HOME dotfiles   # dotfiles only, no installers, no clone (no root)
@@ -12,7 +14,6 @@ ref_name=${GITHUB_REF_NAME:-main}
 
 echo Bootstrap installing dotfiles to $dst
 
-set -e
 set -x
 
 cd /tmp

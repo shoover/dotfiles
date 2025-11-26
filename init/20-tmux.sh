@@ -1,3 +1,7 @@
+#!/bin/bash
+
+set -e
+
 # Install from source to support specific syntax.
 if ! [ -x "$(command -v tmux)" ]; then
     # https://gist.github.com/P7h/91e14096374075f5316e

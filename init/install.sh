@@ -8,8 +8,7 @@
 #
 # Compliments to https://github.com/holman/dotfiles/blob/master/script/bootstrap
 
-set -e
-set -x
+set -xeo pipefail
 
 DEST=$(readlink -f ${1:-$HOME})
 selection=${2:-all}
