@@ -29,6 +29,8 @@ COPY . .
 RUN overwrite_all=true init/install.sh
 
 FROM setup AS bootstrap
+ARG GITHUB_REF
+ENV GITHUB_REF=${GITHUB_REF}
 ARG GITHUB_REF_NAME
 ENV GITHUB_REF_NAME=${GITHUB_REF_NAME}
 
