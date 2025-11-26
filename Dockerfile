@@ -20,6 +20,7 @@ RUN apt-get update && apt-get install -y sudo wget
 RUN groupadd --gid $USER_GID $USER || groupmod --gid $USER_GID $USER
 RUN useradd --system --uid $USER_UID --gid $USER --groups sudo --create-home --home-dir /home/$USER --shell /bin/bash $USER
 RUN echo "$USER ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+RUN echo 'Defaults env_keep += "DEBIAN_FRONTEND"' >> /etc/sudoers
 
 USER $USER
 WORKDIR /home/$USER
