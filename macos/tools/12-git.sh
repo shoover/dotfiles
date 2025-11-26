@@ -11,11 +11,11 @@ if [ -f "$config_path" ]; then
   exit 0
 fi
 
+email=
 if [ -t 0 ]; then
   read -r -p "Preferred git email [${default_email}]: " email
 else
-  echo "No TTY available to read preferred git email. Skipping."
-  exit 0
+  echo "No TTY available to read preferred git email. Using default."
 fi
 
 if [ -z "$email" ]; then

@@ -15,10 +15,16 @@ DOTFILES=$(cd "$(dirname "$BASH_SOURCE")/.."; pwd -P)
 function install_scripts {
     export DEST
     export DOTFILES
-    find -H "$DOTFILES/tools" -name "[0-9][0-9]-*.sh" | sort -n | while read script ; do
+
+    local -a scripts=()
+    while IFS= read -r script; do
+        scripts+=("$script")
+    done < <(find -H "$DOTFILES/tools" -name "[0-9][0-9]-*.sh" | sort -n)
+
+    for script in "${scripts[@]}"; do
         echo ''
-        echo Installing $script
-        bash -x $script </dev/tty
+        echo Installing "$script"
+        bash -x "$script"
     done
 }
 
