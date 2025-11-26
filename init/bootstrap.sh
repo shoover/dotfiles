@@ -40,6 +40,9 @@ then
     exit 1
 fi
 
+# Don't prompt for tzdata region, postfix config
+export DEBIAN_FRONTEND=noninteractive
+
 bash -c dotfiles/init/00-platform.sh
 bash -c dotfiles/init/01-git.sh
 
