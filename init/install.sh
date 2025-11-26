@@ -171,6 +171,10 @@ function install_dest_bin {
 function install_scripts {
     export DEST
     export DOTFILES
+
+    # Don't prompt for tzdata region, postfix config
+    export DEBIAN_FRONTEND=noninteractive
+
     find -H "$DOTFILES/init" -name "[0-9][0-9]-*.sh" | sort -n | while read script ; do
         echo ''
         echo Installing $script
