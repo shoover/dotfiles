@@ -115,6 +115,8 @@ link_file () {
 
     if [ "$skip" != "true" ]  # "false" or empty
     then
+        local dest_dir=$(dirname "$dst")
+        mkdir -p "$dest_dir"
         ln -s "$src" "$dst"
         success "linked $src to $dst"
     fi
@@ -129,12 +131,16 @@ function install_links {
     local backup_all=${backup_all:-false}
     local skip_all=${skip_all:-false}
 
-    # TODO: support links in nested directories, preserving the relative path
-    for src in $(find -H "$DOTFILES/links" -maxdepth 1 -type f -not -path '*/.git/*')
+    local links_root="$DOTFILES/links"
+
+    # Preserve the directory structure relative to links_root
+    while IFS= read -r src
     do
-        dst="$DEST/$(basename "${src}")"
+        local rel_path dst
+        rel_path="${src#$links_root/}"
+        dst="$DEST/$rel_path"
         link_file "$src" "$dst"
-    done
+    done < <(find -H "$links_root" -type f -not -path '*/.git/*')
 }
 
 install_links
