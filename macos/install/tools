@@ -16,6 +16,8 @@ function install_scripts {
     export DEST
     export DOTFILES
 
+    # Keep find and execute loops separate so the find pipe doesn't break
+    # reading user input in scripts.
     local -a scripts=()
     while IFS= read -r script; do
         scripts+=("$script")
