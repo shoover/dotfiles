@@ -13,4 +13,4 @@ else
     echo Homebrew is already installed. Skipping.
 fi
 
-brew install direnv iterm2 tmux tree
+brew bundle

@@ -1,0 +1,24 @@
+brew "direnv"
+brew "fzf"
+cask "iterm2"
+brew "tmux"
+brew "tree"
+
+cask "emacs-app" # if [ -d /Applications/Emacs.app ]; then skip
+
+brew "git"
+brew "gh"
+
+brew "duckdb"
+brew "sqlite3"
+
+brew "python"
+brew "uv"
+
+brew "pandoc"
+
+brew "docker" # skip if command exists
+brew "docker-buildx"
+cask "docker-desktop"
+
+cask "codex"
