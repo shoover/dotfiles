@@ -23,4 +23,5 @@ brew "docker" # skip if command exists
 brew "docker-buildx"
 cask "docker-desktop"
 
+cask "claude-code"
 cask "codex"

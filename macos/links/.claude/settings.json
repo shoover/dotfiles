@@ -1,0 +1,22 @@
+{
+    "sandbox": {
+        "enabled": true,
+        "autoAllowBashIfSandboxed": true,
+        "allowUnsandboxedCommands": false
+    },
+    "permissions": {
+        "allow": [
+            "WebSearch",
+            "WebFetch(domain:github.com)"
+        ],
+        "deny": [
+            "Read(./.env)",
+            "Read(./.env.*)",
+            "Read(.envrc)",
+            "Read(~/.aws/**)"
+        ],
+        "ask": [],
+        "defaultMode": "default"
+    },
+    "alwaysThinkingEnabled": true
+}
