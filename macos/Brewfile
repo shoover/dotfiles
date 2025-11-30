@@ -3,6 +3,7 @@ brew "fzf"
 cask "iterm2"
 brew "tmux"
 brew "tree"
+brew "watch"
 
 cask "emacs-app" # if [ -d /Applications/Emacs.app ]; then skip
 
