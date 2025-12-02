@@ -1,0 +1,2 @@
+# Local direnv overrides stay untracked
+.env.local
