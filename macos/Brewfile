@@ -1,10 +1,30 @@
+require "set"
+
+# Patch brew and cask to skip any packages listed in HOMEBREW_SKIP_PACKAGES.
+SKIP = ENV.fetch("HOMEBREW_SKIP_PACKAGES", "")
+           .split(/[, ]+/).map(&:strip).reject(&:empty?).to_set
+
+module SkipPackages
+    def brew(name, *args, **opts, &blk)
+        SKIP.include?(name) ? puts("Skipping #{name}") : super
+    end
+
+    def cask(name, *args, **opts, &blk)
+        SKIP.include?(name) ? puts("Skipping #{name}") : super
+    end
+end
+
+Homebrew::Bundle::Dsl.prepend(SkipPackages)
+
+
 brew "direnv"
 brew "fzf"
 cask "iterm2"
 brew "tmux"
 brew "tree"
+brew "watch"
 
-cask "emacs-app" # if [ -d /Applications/Emacs.app ]; then skip
+cask "emacs-app"
 
 brew "git"
 brew "gh"
@@ -15,10 +35,13 @@ brew "sqlite3"
 brew "python"
 brew "uv"
 
+brew "fnm"
+
 brew "pandoc"
 
-brew "docker" # skip if command exists
+brew "docker"
 brew "docker-buildx"
 cask "docker-desktop"
 
+cask "claude-code"
 cask "codex"

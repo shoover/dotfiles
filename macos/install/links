@@ -137,7 +137,7 @@ function install_links {
     local -a link_sources=()
     while IFS= read -r src; do
         link_sources+=("$src")
-    done < <(find -H "$links_root" -type f -not -path '*/.git/*')
+    done < <(find -H "$links_root" -not -path '*/.git/*' \( -type f -o -type l \))
 
     local src
     for src in "${link_sources[@]}"; do

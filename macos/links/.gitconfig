@@ -3,6 +3,7 @@
     config = false
 [core]
 	autocrlf = false
+	excludesfile = ~/.gitignore
 [init]
 	defaultBranch = main
 [include]
