@@ -15,6 +15,9 @@ fonts=(
     "IBMPlexSerif-Regular.otf|https://github.com/IBM/plex/releases/download/%40ibm%2Fplex-serif%401.1.0/ibm-plex-serif.zip|ibm-plex-serif/fonts/complete/otf"
     "CooperHewitt-Medium.otf|https://www.cooperhewitt.org/wp-content/uploads/fonts/CooperHewitt-OTF-public.zip|CooperHewitt-OTF-public/"
     "Charter Regular.otf|https://practicaltypography.com/fonts/Charter%20210112.zip|Charter 210112/OTF format (best for Mac OS)/Charter"
+    "SourceSerif4Display-Regular.otf|https://github.com/adobe-fonts/source-serif/releases/download/4.005R/source-serif-4.005_Desktop.zip|source-serif-4.005_Desktop/OTF"
+    "SourceSans3-Regular.otf|https://github.com/adobe-fonts/source-sans/releases/download/3.052R/OTF-source-sans-3.052R.zip|OTF"
+    "SourceCodePro-Regular.otf|https://github.com/adobe-fonts/source-code-pro/releases/download/2.042R-u%2F1.062R-i%2F1.026R-vf/OTF-source-code-pro-2.042R-u_1.062R-i.zip|OTF"
 )
 
 for font_spec in "${fonts[@]}"; do
