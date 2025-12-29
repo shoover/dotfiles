@@ -20,6 +20,7 @@ Homebrew::Bundle::Dsl.prepend(SkipPackages)
 brew "direnv"
 brew "fzf"
 cask "iterm2"
+brew "just"
 brew "tmux"
 brew "tree"
 brew "watch"

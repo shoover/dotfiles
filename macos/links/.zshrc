@@ -17,6 +17,7 @@ else
 fi
 
 alias m="make"
+alias j="just"
 
 eval "$(direnv hook zsh)"
 
