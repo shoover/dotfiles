@@ -46,3 +46,7 @@ cask "docker-desktop"
 
 cask "claude-code"
 cask "codex"
+
+brew "swiftformat"
+brew "swiftlint"
+brew "cameroncooke/axe/axe"
