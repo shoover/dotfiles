@@ -1,5 +1,5 @@
 Text style
-- Never add emoji to any text without an explicit requirement from the user.
+- Emoji are prohibited. Exception: unambiguous statuses in CLI/script output.
 - Wrap orgmode/markdown lines.
 
 Source control
@@ -14,3 +14,8 @@ Source control
 
 Python
 - Scripts: if no project, embed dependencies with PEP 723 inline script metadata.
+
+## Just
+
+- Prefer for commands, unless there are established package manager scripts.
+- Recipes are not bash. Recipe variables, top-level variables, or same-line bash variables.
