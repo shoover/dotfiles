@@ -1,0 +1,6 @@
+These skills were copied from https://github.com/Dimillian/Skills 1/17/2026:
+- swift-concurrency-expert
+- swiftui-liquid-glass
+- swiftui-performance-audit
+- swiftui-ui-patterns
+- swiftui-view-refactor
