@@ -126,7 +126,8 @@ link_file () {
 # Install the links. Nested directory structure is preserved relative to links/.
 #
 
-function install_links {
+# Files, full depth
+function install_links_files {
     local overwrite_all=${overwrite_all:-false}
     local backup_all=${backup_all:-false}
     local skip_all=${skip_all:-false}
@@ -148,4 +149,36 @@ function install_links {
     done
 }
 
-install_links
+# Directories, depth 3. This allows merging subdirectories into existing app
+# dotfiles like ~/.codex/skills/ without overwriting the whole directory.
+#
+# Codex doesn't support skill files as symlink, so we link subdirectories.
+# aren't recognized as individual file symlinks.
+function install_links_depth_3 {
+    local overwrite_all=${overwrite_all:-false}
+    local backup_all=${backup_all:-false}
+    local skip_all=${skip_all:-false}
+
+    local links_root="$DOTFILES/links-d3"
+
+    if [ ! -d "$links_root" ]; then
+        return
+    fi
+
+    # Decouple find and install loops to avoid the pipe hijacking the TTY.
+    local -a link_sources=()
+    while IFS= read -r src; do
+        link_sources+=("$src")
+    done < <(find -H "$links_root" -not -path '*/.git/*' -mindepth 3 -maxdepth 3 -type d)
+
+    local src
+    for src in "${link_sources[@]}"; do
+        local rel_path dst
+        rel_path="${src#$links_root/}"
+        dst="$DEST/$rel_path"
+        link_file "$src" "$dst"
+    done
+}
+
+install_links_files
+install_links_depth_3
