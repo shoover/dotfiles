@@ -15,5 +15,5 @@ Linux:
 - `init`: install scripts
 
 Shared:
-- Makefile
+- Justfile
 - .github/workflows CI installer checks
