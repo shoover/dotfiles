@@ -1,11 +1,11 @@
 prefix_rule(pattern=["commit"], decision="allow")
-prefix_rule(pattern=["git", ["diff", "log", "status"], decision="allow")
-prefix_rule(pattern=["git", ["add", "commit"], decision="allow")
+prefix_rule(pattern=["git", ["diff", "log", "status"]], decision="allow")
+prefix_rule(pattern=["git", ["add", "commit"]], decision="allow")
 
 prefix_rule(pattern=["git", ["checkout", "push", "reset"]], decision="prompt")
 
 prefix_rule(
-    pattern=["gh", ["issue", "pr"], ["list", "view"]],
+    pattern=["gh", ["issue", "pr", "release"], ["list", "view"]],
     decision="allow"
 )
 prefix_rule(
@@ -13,7 +13,8 @@ prefix_rule(
     decision="allow"
 )
 
-prefix_rule(pattern=["just", ["test", "test-"]], decision="allow")
+prefix_rule(pattern=["just", ["check", "fmt", "lint", "test", "test-"]], decision="allow")
+prefix_rule(pattern=["swift", ["build", "package", "test"]], decision="allow")
 
 prefix_rule(pattern=["axe"], decision="allow")
 prefix_rule(pattern=["xcodebuild"], decision="allow")

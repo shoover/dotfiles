@@ -14,13 +14,13 @@
     "defaultMode": "default"
   },
   "model": "opus",
+  "enabledPlugins": {
+    "swift-lsp@claude-plugins-official": true
+  },
   "sandbox": {
     "enabled": true,
     "autoAllowBashIfSandboxed": true,
     "allowUnsandboxedCommands": false
   },
-  "alwaysThinkingEnabled": true,
-  "enabledPlugins": {
-    "swift-lsp@claude-plugins-official": true
-  }
+  "alwaysThinkingEnabled": true
 }
