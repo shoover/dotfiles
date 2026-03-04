@@ -8,7 +8,8 @@ Source control
 - Safe by default: `git status/diff/log`. Push only when user asks.
 - Branch changes require user consent.
 - Destructive ops forbidden unless explicitly asked (`reset --hard`, `clean`, `restore`, `rm`).
-- Don’t delete/rename/commit unexpected stuff; assume multiple agents, ask if unsure.
+- Don’t delete/rename/commit unexpected stuff; assume multiple agents, ask only
+  if there's a conflict you can't ignore.
 - Prefer commit helper on PATH: `commit MESSAGE FILE1 FILE2 ...`.
 - No amend unless asked.
 
