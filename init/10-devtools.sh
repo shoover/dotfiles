@@ -7,6 +7,7 @@ set -e
 #
 if ! [ -x "$(command -v emacs)" ]; then
     # Install the copious emacs build deps. "Quiet" to disable prompt for postfix config.
+    sudo apt-get update
     sudo apt-get build-dep -yq emacs
     sudo apt-get install -y gnutls-bin gnutls-dev
 
