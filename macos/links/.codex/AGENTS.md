@@ -24,7 +24,7 @@
 - No amend unless asked.
 
 ## Python
-- Scripts: if no project, embed dependencies with PEP 723 inline script metadata.
+- Scripts: if no project, use `uv`, embed dependencies with PEP 723 inline script metadata.
 
 ## Just
 
