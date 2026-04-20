@@ -1,9 +1,10 @@
 ---
 name: macos-automator-app
 description: >
-  Create or modify macOS Automator .app bundles by directly editing the
-  bundle contents. Use when the user wants to build an Automator application
-  or service without using the Automator GUI editor.
+  Create or modify macOS Automator application bundles (.app) by directly
+  editing the bundle contents. Use when the user wants to build an Automator
+  app (a standalone .app bundle, not a .workflow Service) without using the
+  Automator GUI editor.
 ---
 
 # macOS Automator App
@@ -73,40 +74,15 @@ attributes and re-sign:
 
 ```bash
 find "My Workflow.app" -type f -exec xattr -c {} \;
-dot_clean -m "My Workflow.app"
 codesign --force --sign - --deep "My Workflow.app"
 ```
 
 Ad-hoc signing (`-`) is sufficient for local use. If `codesign` complains about
-"resource fork, Finder information, or similar detritus not allowed", the
-`xattr -c` and `dot_clean` steps were not thorough enough — run them again.
+"resource fork, Finder information, or similar detritus not allowed", run
+`xattr -c` again and retry.
 
 ## Common Pitfalls
 
-### `path to temporary items` is sandboxed
-
-`(POSIX path of (path to temporary items))` resolves to a per-process sandbox
-directory under `/private/var/folders/`. Other processes cannot read files there.
-
-**Fix:** Use `/tmp/` for files that must be shared with other processes:
-
-```applescript
-set tempPath to "/tmp/my_temp_file.txt"
-```
-
-### Shell quoting in `do shell script`
-
-`quoted form of` wraps a string in single quotes. Nesting `quoted form of`
-inside another `quoted form of` produces `''path''` which breaks the shell:
-
-```applescript
-# BROKEN: produces ''path'' inside outer single quotes
-do shell script cmd & " -e " & quoted form of ("(insert " & quoted form of somePath & ")")
-
-# WORKS: embed the path with escaped double-quote delimiters
-do shell script cmd & " -e " & quoted form of ("(insert \"" & somePath & "\")")
-```
-
-Rule: the outermost `quoted form of` wraps the entire expression in single
-quotes. Inside that, use `\"` for any string delimiters so paths appear as
-`"/path/to/file"` without quoting conflicts.
+AppleScript shell quoting and sandboxing pitfalls are the same as for
+`.workflow` services. See `macos-workflow-service` Common Pitfalls for
+`path to temporary items` and `do shell script` quoting guidance.
