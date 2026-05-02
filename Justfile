@@ -20,3 +20,6 @@ macos-install-links:
 
 macos-install-tools:
 	cd macos && install/tools
+
+codex-skills-sync:
+	./macos/tools/update-codex-skills

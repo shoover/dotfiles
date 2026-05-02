@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+
+# Sync locally vendored SwiftUI-related Codex skills from Dimillian/Skills.
+
+set -euo pipefail
+
+readonly repo_root=$(
+  cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd -P
+)
+readonly skills_root="$repo_root/macos/links-d3/.codex/skills"
+readonly upstream_repo='https://github.com/Dimillian/Skills.git'
+readonly -a skills=(
+  swift-concurrency-expert
+  swiftui-liquid-glass
+  swiftui-performance-audit
+  swiftui-ui-patterns
+  swiftui-view-refactor
+)
+
+require_command() {
+  if ! command -v "$1" >/dev/null 2>&1; then
+    printf 'Missing required command: %s\n' "$1" >&2
+    exit 1
+  fi
+}
+
+require_command git
+require_command rsync
+
+if [ ! -d "$skills_root" ]; then
+  printf 'Skills directory not found: %s\n' "$skills_root" >&2
+  exit 1
+fi
+
+tmpdir=$(mktemp -d "${TMPDIR:-/tmp}/codex-skills.XXXXXX")
+cleanup() {
+  rm -rf "$tmpdir"
+}
+trap cleanup EXIT
+
+git clone --depth 1 "$upstream_repo" "$tmpdir/Skills"
+
+readonly upstream_root="$tmpdir/Skills"
+readonly upstream_commit=$(git -C "$upstream_root" rev-parse HEAD)
+readonly sync_date=$(date +%F)
+
+for skill in "${skills[@]}"; do
+  src="$upstream_root/$skill"
+  dst="$skills_root/$skill"
+
+  if [ ! -d "$src" ]; then
+    printf 'Upstream skill directory not found: %s\n' "$src" >&2
+    exit 1
+  fi
+
+  if [ ! -d "$dst" ]; then
+    printf 'Local skill directory not found: %s\n' "$dst" >&2
+    exit 1
+  fi
+
+  rsync -a --delete "$src/" "$dst/"
+done
+
+{
+  printf 'These skills were copied from https://github.com/Dimillian/Skills on\n'
+  printf '%s at commit %s:\n' "$sync_date" "$upstream_commit"
+  for skill in "${skills[@]}"; do
+    printf -- '- %s\n' "$skill"
+  done
+} > "$skills_root/README.org"
+
+printf 'Synced %d skills from %s at %s\n' \
+  "${#skills[@]}" "$upstream_repo" "$upstream_commit"
