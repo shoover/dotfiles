@@ -1,0 +1,4 @@
+interface:
+  display_name: "Spec"
+  short_description: "Turn discussions into concise specs"
+  default_prompt: "Use $spec to write a concise implementation spec."

@@ -1,6 +1,6 @@
 # Coding style
 - Think critically, fix underlying issues. No fallback paths papering over
-  uncertainty. Handle known cases and fail fast otherwise.
+  uncertainty. Handle known cases, fail fast, and escalate decisions to the user.
 
 # Text style
 - Emoji are prohibited. Exception: unambiguous statuses in CLI/script output.
@@ -18,7 +18,7 @@
   if there's a conflict you can't ignore.
 - Prefer commit helper on PATH: `commit MESSAGE FILE1 FILE2 ...`.
 - Commit: Conventional Commits (`feature|fix|refactor|test|ci|tools|docs`) w/ succint
-  and semantic top line summary plus succint detail bullets documenting decisions and
+  and semantic top line summary plus succint, capitalized detail bullets documenting decisions and
   tradeoffs. Summary hints:
   - fix: behavior or error that was fixed
 - No amend unless asked.
