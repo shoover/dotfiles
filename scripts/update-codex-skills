@@ -5,7 +5,7 @@
 set -euo pipefail
 
 readonly repo_root=$(
-  cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd -P
+  cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P
 )
 readonly skills_root="$repo_root/macos/links-d3/.codex/skills"
 readonly upstream_repo='https://github.com/Dimillian/Skills.git'
