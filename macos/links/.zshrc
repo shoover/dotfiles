@@ -16,6 +16,9 @@ else
   export EDITOR='emacsclient'
 fi
 
+# Interactive git checkout. Thanks, Julia Evans.
+alias gcoi='git checkout $(git branch | fzf | sed "s/^[* ] //")'
+
 alias m="make"
 alias j="just"
 alias jb="just build"
