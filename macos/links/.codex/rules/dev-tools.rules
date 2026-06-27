@@ -5,9 +5,14 @@ prefix_rule(pattern=["git", ["add", "commit"]], decision="allow")
 prefix_rule(pattern=["git", ["checkout", "push", "reset"]], decision="prompt")
 
 prefix_rule(
-    pattern=["gh", ["issue", "pr", "release"], ["list", "view"]],
+    pattern=["gh", ["issue", "release"], ["list", "view"]],
     decision="allow"
 )
+prefix_rule(
+    pattern=["gh", "pr", ["checks", "list", "view"]],
+    decision="allow"
+)
+
 prefix_rule(
     pattern=["gh", "run", ["list", "view", "watch"]],
     decision="allow"
@@ -19,3 +24,5 @@ prefix_rule(pattern=["swift", ["build", "package", "test"]], decision="allow")
 prefix_rule(pattern=["axe"], decision="allow")
 prefix_rule(pattern=["xcodebuild"], decision="allow")
 prefix_rule(pattern=["xcrun"], decision="allow")
+
+prefix_rule(pattern=["bd"], decision="allow")
