@@ -1,6 +1,7 @@
 {
   "permissions": {
     "allow": [
+      "Bash(bd *)",
       "WebSearch",
       "WebFetch(domain:github.com)"
     ],
