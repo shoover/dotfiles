@@ -22,5 +22,11 @@
     "autoAllowBashIfSandboxed": true,
     "allowUnsandboxedCommands": false
   },
+  "spinnerVerbs": {
+    "mode": "replace",
+    "verbs": [
+      "Working"
+    ]
+  },
   "alwaysThinkingEnabled": true
 }
