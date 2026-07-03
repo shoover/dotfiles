@@ -13,7 +13,10 @@
     "ask": [],
     "defaultMode": "default"
   },
-  "model": "opus",
+  "statusLine": {
+    "type": "command",
+    "command": "bash ~/.claude/statusline.sh"
+  },
   "enabledPlugins": {
     "swift-lsp@claude-plugins-official": true
   },
@@ -28,5 +31,6 @@
       "Working"
     ]
   },
-  "alwaysThinkingEnabled": true
+  "alwaysThinkingEnabled": true,
+  "model": "sonnet"
 }
