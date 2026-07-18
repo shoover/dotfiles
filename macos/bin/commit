@@ -54,13 +54,17 @@ last_commit_error=''
 
 run_git_commit() {
   local stderr_log
-  stderr_log=$(mktemp)
-  if git commit -m "$commit_message" -- "${files[@]}" 2> >(tee "$stderr_log" >&2); then
+
+  # Override temp dir to allow sandboxed harnesses to work on MacOS (vs. /var/folders/...)
+  stderr_log=$(mktemp "${TMPDIR:-/tmp}/commit-stderr.XXXXXXXXXX")
+  if git commit -m "$commit_message" -- "${files[@]}" 2>"$stderr_log"; then
+    cat "$stderr_log" >&2
     rm -f "$stderr_log"
     last_commit_error=''
     return 0
   fi
 
+  cat "$stderr_log" >&2
   last_commit_error=$(cat "$stderr_log")
   rm -f "$stderr_log"
   return 1
