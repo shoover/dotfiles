@@ -1,36 +1,41 @@
 {
-  "permissions": {
-    "allow": [
-      "Bash(bd *)",
-      "WebSearch",
-      "WebFetch(domain:github.com)"
-    ],
-    "deny": [
-      "Read(./.env)",
-      "Read(./.env.*)",
-      "Read(~/.aws/**)"
-    ],
-    "ask": [],
-    "defaultMode": "default"
-  },
-  "statusLine": {
-    "type": "command",
-    "command": "bash ~/.claude/statusline.sh"
-  },
-  "enabledPlugins": {
-    "swift-lsp@claude-plugins-official": true
-  },
-  "sandbox": {
-    "enabled": true,
-    "autoAllowBashIfSandboxed": true,
-    "allowUnsandboxedCommands": false
-  },
-  "spinnerVerbs": {
-    "mode": "replace",
-    "verbs": [
-      "Working"
-    ]
-  },
-  "alwaysThinkingEnabled": true,
-  "model": "sonnet"
+    "permissions": {
+        "allow": [
+            "Bash(bd *)",
+            "Bash(gh run list*)",
+            "Bash(gh run view*)",
+            "WebSearch",
+            "WebFetch(domain:github.com)"
+        ],
+        "deny": [
+            "Read(./.env)",
+            "Read(./.env.*)",
+            "Read(~/.aws/**)"
+        ],
+        "ask": [],
+        "defaultMode": "default"
+    },
+    "model": "opus",
+    "statusLine": {
+        "type": "command",
+        "command": "bash ~/.claude/statusline.sh"
+    },
+    "enabledPlugins": {
+        "swift-lsp@claude-plugins-official": true
+    },
+    "sandbox": {
+        "enabled": true,
+        "autoAllowBashIfSandboxed": true,
+        "allowUnsandboxedCommands": false,
+    },
+    "spinnerVerbs": {
+        "mode": "replace",
+        "verbs": [
+            "Working"
+        ]
+    },
+    "alwaysThinkingEnabled": true,
+    "effortLevel": "high",
+    "agentPushNotifEnabled": true,
+    "includeCoAuthoredBy": false
 }
