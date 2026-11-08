@@ -2,7 +2,7 @@
 	stash = false
     config = false
 [core]
-	autocrlf = false
+	autocrlf = input
 	excludesfile = ~/.gitignore
 [init]
 	defaultBranch = main
